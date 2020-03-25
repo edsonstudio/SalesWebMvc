@@ -1,0 +1,31 @@
+AVISO: provider do MySQL
+ATENÇÃO
+
+No próximo vídeo, a partir do instante 6:54, nós vamos mostrar como instalar o provider do MySQL para o Entity Framework. Neste momento, é muito importante que você use as MESMAS VERSÕES das ferramentas para evitar problemas de incompatibilidade. Assim, vamos lá:
+
+VERSÃO DO .NET CORE:
+
+Se você criou seu projeto com uma versão do .NET Core diferente da VERSÃO 2.1, por favor altere seu projeto para a versão 2.1:
+
+Botão direito no nome do projeto -> Properties
+
+Na aba Application -> Campo Target framework: .NET Core 2.1
+
+VERSÃO DO PROVIDER MYSQL
+
+Para instalar a versão correta do provider do MySQL, NÃO execute o comando Install-Package Pomelo.EntityFrameworkCore.MySql da forma como nós mostramos no vídeo! Ao invés disso, faça uma das seguintes alternativas:
+
+1) Execute o comando especificando a versão 2.1.1:
+
+Install-Package Pomelo.EntityFrameworkCore.MySql -Version 2.1.1
+
+2) Ou então instale usando a interface do Visual Studio:
+
+Botão direito no nome do projeto -> Manage NuGet Packages
+
+Na aba Browse, pesquise por: Pomelo.EntityFrameworkCore.MySql
+
+Clique uma vez no resultado Pomelo.EntityFrameworkCore.Mysql e, na janela ao lado, escolha a versão 2.1.1
+
+Clique em Install e conclua a instalação.
+

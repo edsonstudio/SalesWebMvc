@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SalesWebMvc.Models;
+using SalesWebMvc.Models.ViewModels;
 using SalesWebMvc.Services;
 
 namespace SalesWebMvc.Controllers
@@ -11,10 +12,12 @@ namespace SalesWebMvc.Controllers
     public class SellersController : Controller
     {
         private readonly SellerService _sellerService; //dependencia para o SellerService
+        private readonly DepartmentService _departmentService;
 
-        public SellersController(SellerService sellerService) //construtor para injetar dependencia
+        public SellersController(SellerService sellerService, DepartmentService departmentService) //construtor para injetar dependencia
         {
             _sellerService = sellerService;
+            _departmentService = departmentService;
         }
         public IActionResult Index()
         {
@@ -24,7 +27,9 @@ namespace SalesWebMvc.Controllers
 
         public IActionResult Create()
         {
-            return View();
+            var departments = _departmentService.FindAll();
+            var viewModel = new SellerFormViewModel { Departments = departments };
+            return View(viewModel); //Agora a tela de cadastro quando for acionada pela primeira vez, já vai iniciar com a lista de departamentos populados
         }
 
         [HttpPost] //Anotation POST

@@ -38,6 +38,13 @@ namespace SalesWebMvc.Controllers
         [ValidateAntiForgeryToken]//Previnir ataque CSRF - Alguem aproveita a sessao de autenticação enviando dados maliciosos
         public IActionResult Create(Seller seller)
         {
+            //Validacao do formulario na pagina de cadastro
+            if (!ModelState.IsValid)
+            {
+                var departments = _departmentService.FindAll();
+                var viewModel = new SellerFormViewModel { Seller = seller, Departments = departments };
+                return View(viewModel); // caso os campos não estejam válidos, ele retorna a mesma view junto com o objeto anterior, até que seja concluido de forma válida
+            }
             _sellerService.Insert(seller);
 
             return RedirectToAction(nameof(Index));
@@ -107,7 +114,15 @@ namespace SalesWebMvc.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, Seller seller)
         {
-            if(id != seller.Id)
+            //Validacao do formulario na pagina de cadastro
+            if (!ModelState.IsValid)
+            {
+                var departments = _departmentService.FindAll();
+                var viewModel = new SellerFormViewModel { Seller = seller, Departments = departments };
+                return View(viewModel); // caso os campos não estejam válidos, ele retorna a mesma view junto com o objeto anterior, até que seja concluido de forma válida
+            }
+
+            if (id != seller.Id)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id mismatch" });
             }

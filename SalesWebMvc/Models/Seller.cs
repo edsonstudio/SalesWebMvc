@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
 namespace SalesWebMvc.Models
@@ -8,8 +9,17 @@ namespace SalesWebMvc.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
+
+        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
+
+        [Display(Name = "Birth Date")] // Esse Anotation altera como aparecerá esse rótulo na pagina do site
+        [DataType(DataType.Date)] //formata a data
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")] //formata a data
         public DateTime BirthDate { get; set; }
+
+        [Display(Name = "Base Salary")] //formata o rotulo no display da pagina
+        [DisplayFormat(DataFormatString = "{0:F2}")] //formata o valor com 2 casas decimais
         public double BaseSalary { get; set; }
         public Department Department { get; set; } //Associação
         public int DepartmentId { get; set; }
